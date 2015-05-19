@@ -4,26 +4,75 @@
 	<head>
 		<title>This is a touch controller</title>
 
-		<script>
-			function initialise() {
-				var canvas = document.getElementById("touchCanvas");
-				canvas.addEventListener("mousedown", doMouseDown, false);
-				console.log("Is dis call");
-			}
 
-			function doMouseDown(event) {
-				console.log("Mouse down");
-				canvas_x = event.pageX;
-				canvas_y = event.pageY;
-				alert("BLAH");
-			}
-		</script>
 	</head>
 
-	<body onLoad=initialise()>
-		<canvas width="100%" height="100%" id="touchCanvas">
+	<body >
+		<canvas width="1000" height="1000" id="touchCanvas">
 			canvas tag not supported
 		</canvas>
+		<script>
+			var startX;
+			var startY;
+			var endX;
+			var endY;
+			
+			
+			var canvas = document.getElementById("touchCanvas");
+			var context = canvas.getContext("2d");
+
+			canvas.addEventListener("mousedown", doMouseDown, false);
+			canvas.addEventListener("mouseup", doMouseUp, false);
+
+			context.clearRect(0, 0, canvas.width, canvas.height);
+	        context.font = '18pt Calibri';
+	        context.fillStyle = 'black';
+		        
+			
+
+			function doMouseDown(event) {
+				startX = event.pageX;
+				startY = event.pageY;
+			}
+
+			function doMouseUp(event) {
+				endX = event.pageX;
+				endY = event.pageY;
+
+				var resultX = startX - endX;
+				var resultY = startY - endY;
+
+				var absX = Math.abs(resultX);
+				var absY = Math.abs(resultY);
+
+				console.log("resultx=" + resultX + " absX=" + absX);
+				console.log(" absY=" + absY);
+
+				if(resultX < 0 && absX > 100 && absY < 50){
+					console.log("Move right");
+					writeMessage(canvas, "Move right")
+				}
+				else if(resultX > 0 && absX > 100 && absY < 50){
+					console.log("Move left");
+					writeMessage(canvas, "Move left")
+				}
+				else if( absX < 5 ) {
+					console.log("Stop");
+					writeMessage(canvas, "Stop")
+				}
+				else{
+					writeMessage(canvas, "Try again")
+				}
+			}
+
+			function writeMessage(canvas, message) {
+		        var context = canvas.getContext('2d');
+		        context.clearRect(0, 0, canvas.width, canvas.height);
+		        context.font = '18pt Calibri';
+		        context.fillStyle = 'black';
+		        context.fillText(message, 10, 25);
+		      }
+		</script>
 	</body>
 
 </html>
