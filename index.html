@@ -1,0 +1,29 @@
+<! DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>This is a touch controller</title>
+
+		<script>
+			function initialise() {
+				var canvas = document.getElementById("touchCanvas");
+				canvas.addEventListener("mousedown", doMouseDown, false);
+				console.log("Is dis call");
+			}
+
+			function doMouseDown(event) {
+				console.log("Mouse down");
+				canvas_x = event.pageX;
+				canvas_y = event.pageY;
+				alert("BLAH");
+			}
+		</script>
+	</head>
+
+	<body onLoad=initialise()>
+		<canvas width="100%" height="100%" id="touchCanvas">
+			canvas tag not supported
+		</canvas>
+	</body>
+
+</html>
