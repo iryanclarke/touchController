@@ -21,8 +21,8 @@
 			var canvas = document.getElementById("touchCanvas");
 			var context = canvas.getContext("2d");
 
-			canvas.addEventListener("touchstart", downEvent, false);
-			canvas.addEventListener("touchend", releaseEvent, false);
+			canvas.addEventListener("mousedown", downEvent, false);
+			canvas.addEventListener("mouseup", releaseEvent, false);
 
 			context.clearRect(0, 0, canvas.width, canvas.height);
 	        context.font = '18pt Calibri';
@@ -31,13 +31,13 @@
 			
 
 			function downEvent(event) {
-				startX = event.targetTouches[0].pageX;
-				startY = event.targetTouches[0].pageY;
+				startX = event.pageX;
+				startY = event.pageY;
 			}
 
 			function releaseEvent(event) {
-				endX = event.targetTouches[0].pageX;
-				endY = event.targetTouches[0].pageY;
+				endX = event.pageX;
+				endY = event.pageY;
 
 				var resultX = startX - endX;
 				var resultY = startY - endY;
